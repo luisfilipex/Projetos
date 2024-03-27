@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro e Listagem de Produtos</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    input, select {
+        margin-bottom: 10px;
+        display: block;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<form id="productForm">
+    <label for="productName">Nome do Produto:</label>
+    <input type="text" id="productName" required>
+
+    <label for="productDescription">Descrição do Produto:</label>
+    <input type="text" id="productDescription" required>
+
+    <label for="productValue">Valor do Produto:</label>
+    <input type="number" id="productValue" required>
+
+    <label for="productAvailable">Disponível para Venda:</label>
+    <select id="productAvailable" required>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+
+    <button type="submit" class="btn">Cadastrar Produto</button>
+</form>
+
+<table id="productTable">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aqui serão adicionados os produtos dinamicamente -->
+    </tbody>
+</table>
+
+<script>
+    const productForm = document.getElementById('productForm');
+    const productTable = document.getElementById('productTable');
+
+    productForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const productName = document.getElementById('productName').value;
+        const productDescription = document.getElementById('productDescription').value;
+        const productValue = document.getElementById('productValue').value;
+        const productAvailable = document.getElementById('productAvailable').value;
+
+        const newRow = `<tr>
+                            <td>${productName}</td>
+                            <td>${productValue}</td>
+                            <td><button class="btn-remove">Remover</button></td>
+                        </tr>`;
+        productTable.querySelector('tbody').insertAdjacentHTML('beforeend', newRow);
+
+        // Limpar os campos do formulário após o cadastro
+        productForm.reset();
+    });
+
+    productTable.addEventListener('click', function(event) {
+        if (event.target.classList.contains('btn-remove')) {
+            const row = event.target.closest('tr');
+            row.remove();
+        }
+    });
+</script>
+
+</body>
+</html>
