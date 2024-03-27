@@ -1,0 +1,1 @@
+Calculadora feita para fazer somas de planilhas, com dois ou somente um valor, Valor + juros, e caso tenha datas repetidas ela faz a soma automaticamente e imprime em arquivo para execell para voce copiar e juntar a sua planilha, foi desenvolvida em HTML,CSS e JavaScript.

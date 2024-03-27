@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            background-color: rgb(113, 173, 197);
+        }
+
+        .dat {
+            display: flex;
+            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            flex-direction: row;
+        }
+
+        .inputContainer {
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            text-align: center;
+            width: 250px;
+            height: 350px;
+            margin: 5px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 150px;
+            font-size: 16px;
+            height: 50px;
+            background-color: rgb(196, 210, 218);
+            border-radius: 5px;
+        }
+
+        label {
+            font-size: 30px;
+        }
+
+	footer{
+	margin-top: 20px;
+	font-size: 20px;
+}
+    </style>
+    <script>
+        numeral.register('locale', 'pt-br', {
+            delimiters: {
+                thousands: '.',
+                decimal: ','
+            },
+            abbreviations: {
+                thousand: 'mil',
+                million: 'milhões',
+                billion: 'b',
+                trillion: 't'
+            },
+            ordinal: () => 'º',
+            currency: {
+                symbol: 'R$'
+            }
+        });
+        numeral.locale('pt-br');
+    </script>
+</head>
+
+<body>
+    <h1>Calculadora </h1>
+    <div class="dat">
+        <div class="inputContainer">
+            <label for="inputDatas">Datas:</label><br>
+            <textarea id="inputDatas" placeholder="Insira as datas (um por linha)"></textarea>
+        </div>
+        <div class="inputContainer">
+            <label for="inputValores">Valor 1:</label><br>
+            <textarea id="inputValores" placeholder="Insira os valores correspondentes (um por linha)"></textarea>
+        </div>
+        <div class="inputContainer">
+            <label for="inputJuros">Valor 2:</label><br>
+            <textarea id="inputJuros" placeholder="Insira os valores de juros correspondentes (um por linha)"></textarea>
+        </div>
+    </div>
+    <div id="resultado"></div>
+    <label for="operacao">Escolha a Operação:</label>
+    <select id="operacao">
+        <option value="soma">Soma</option>
+    </select><br>
+    <button onclick="calcularOperacao('inputDatas', 'inputValores', 'inputJuros', 'resultado')">Calcular</button>
+    <div id="resultadoOutro"></div>
+    <div class="dat">
+        <div class="inputContainer">
+            <label for="inputData">Datas:</label><br>
+            <textarea id="inputData" placeholder="Insira as datas (um por linha)"></textarea>
+        </div>
+        <div class="inputContainer">
+            <label for="inputValor">Valores:</label><br>
+            <textarea id="inputValor" placeholder="Insira os valores correspondentes (um por linha)"></textarea>
+        </div>
+    </div>
+    <label for="operacaoOutro">Escolha a Operação:</label>
+    <select id="operacaoOutro">
+        <option value="soma">Soma</option>
+    </select>
+    <div id="resultadoOutro"></div>
+    <button onclick="calcularOperacao('inputData', 'inputValor', null, 'resultadoOutro')">Calcular</button>
+
+    <script>
+        function calcularOperacao(inputDatasId, inputValoresId, inputJurosId, resultadoId) {
+            const datas = document.getElementById(inputDatasId).value.split('\n');
+            const valores = document.getElementById(inputValoresId).value.split('\n').map(converterParaNumero);
+            const juros = inputJurosId ? document.getElementById(inputJurosId).value.split('\n').map(converterParaNumero) : [];
+            const operacao = document.getElementById('operacao').value;
+
+            if (datas.length !== valores.length || (inputJurosId && datas.length !== juros.length)) {
+                alert("Por favor, insira a mesma quantidade de datas, valores e juros.");
+                return;
+            }
+
+            const resultadoPorData = {};
+
+            for (let i = 0; i < datas.length; i++) {
+                const data = datas[i];
+                let valor = 0;
+
+                if (operacao === 'soma') {
+                    valor = numeral(valores[i]).add(juros[i] || 0).value();
+                } else if (operacao === 'subtracao') {
+                    valor = numeral(valores[i]).subtract(juros[i] || 0).value();
+                }
+
+                if (!isNaN(valor)) {
+                    if (resultadoPorData[data]) {
+                        resultadoPorData[data] += valor;
+                    } else {
+                        resultadoPorData[data] = valor;
+                    }
+                }
+            }
+
+            let resultadoHtml = "<h3>Resultado:</h3>";
+            for (const data in resultadoPorData) {
+                const resultadoFormatado = numeral(resultadoPorData[data]).format('0,0.00');
+                resultadoHtml += `<p>${data}: ${resultadoFormatado}</p>`;
+            }
+
+            document.getElementById(resultadoId).innerHTML = resultadoHtml;
+
+            // Exportar para Excel
+            exportarParaExcel(resultadoPorData);
+        }
+
+        function converterParaNumero(value) {
+            const numeroFormatado = value.trim().replace('.', '').replace(',', '.');
+            const numero = parseFloat(numeroFormatado);
+            return isNaN(numero) ? 0 : numero;
+        }
+
+        function exportarParaExcel(data) {
+            const wsData = [];
+            for (const dataKey in data) {
+                wsData.push({ 'Data': dataKey, 'Resultado': data[dataKey] });
+            }
+
+            const ws = XLSX.utils.json_to_sheet(wsData, { header: ['Data', 'Resultado'] });
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Resultado");
+
+            const hoje = new Date();
+            const dataExportacao = hoje.toISOString().slice(0, 10);
+            const nomeArquivo = `Resultado_${dataExportacao}.xlsx`;
+
+            XLSX.writeFile(wb, nomeArquivo);
+        }
+    </script>
+</body>
+<footer>Desenvolvido por: Luis Filipe</footer>
+</html>
