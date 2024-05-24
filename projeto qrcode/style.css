@@ -11,13 +11,14 @@ body {
   border-radius: 2vh;
   padding: 10px;
   box-shadow: 1px 1px 1px #bebcbc;
+  margin-top: 150px;
 }
 
 .center img {
   display: block;
   margin: auto;
-  width: 100%;
-  max-width: 100%;
+  width: 50%;
+  max-width: 50%;
   border-radius: 5vh;
 }
 
