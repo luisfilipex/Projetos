@@ -6,15 +6,16 @@ body {
 .center {
   margin: auto;
   background-color: hsl(0, 0%, 100%);
-  width: 80%;
+  width: 100%;
   max-width: 600px; 
   border-radius: 2vh;
-  padding: 10px;
+  padding: 100px;
   box-shadow: 1px 1px 1px #bebcbc;
   margin-top: 150px;
 }
 
 .center img {
+  
   display: block;
   margin: auto;
   width: 50%;
