@@ -1,0 +1,34 @@
+body {
+  background-color: hsl(212, 45%, 89%);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center {
+  margin: auto;
+  background-color: hsl(0, 0%, 100%);
+  width: 80%;
+  max-width: 600px; 
+  border-radius: 2vh;
+  padding: 10px;
+  box-shadow: 1px 1px 1px #bebcbc;
+}
+
+.center img {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 5vh;
+}
+
+p, h1 {
+  font-size: 16px;
+  text-align: center;
+}
+
+
+@media screen and (max-width: 768px) {
+  .center {
+      width: 90%; 
+  }
+}
