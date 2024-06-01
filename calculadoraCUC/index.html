@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .row{
+            padding: 20px;
+        }
+        textarea#inputDatas,
+        textarea#inputValores,
+        #inputDatas,
+        #inputValores,
+        #inputJuros,
+        #inputData,
+        #inputValor {
+            height: 200px;
+        }
+
+        .btn-custom {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script>
+        numeral.register('locale', 'pt-br', {
+            delimiters: {
+                thousands: '.',
+                decimal: ','
+            },
+            abbreviations: {
+                thousand: 'mil',
+                million: 'milhões',
+                billion: 'b',
+                trillion: 't'
+            },
+            ordinal: () => 'º',
+            currency: {
+                symbol: 'R$'
+            }
+        });
+        numeral.locale('pt-br');
+
+        function converterParaNumero(value) {
+            const valorSemSimbolo = value.trim().replace(/[^\d,]/g, '').replace(',', '.');
+            const numero = parseFloat(valorSemSimbolo);
+            return isNaN(numero) ? 0 : numero;
+        }
+
+        function calcularOperacao(inputDatas, inputValores, inputJuros, operacao, resultadoId) {
+            const datas = inputDatas.split('\n');
+            const valores = inputValores.split('\n').map(converterParaNumero);
+            const juros = inputJuros ? inputJuros.split('\n').map(converterParaNumero) : [];
+
+            if (datas.length !== valores.length || (inputJuros && datas.length !== juros.length)) {
+                alert("Por favor, insira a mesma quantidade de datas, valores e juros.");
+                return;
+            }
+
+            const resultadoPorData = {};
+
+            for (let i = 0; i < datas.length; i++) {
+                const data = datas[i];
+                const resultadoLinha = operacao === 'soma' ? numeral(valores[i]).add(juros[i] || 0).value() : valores[i] - (juros[i] || 0);
+
+                if (!resultadoPorData[data]) {
+                    resultadoPorData[data] = resultadoLinha;
+                } else {
+                    resultadoPorData[data] += resultadoLinha;
+                }
+            }
+
+            let resultadoHtml = "<h3>Resultado:</h3>";
+            let resultadoFinal = 0;
+
+            for (const data in resultadoPorData) {
+                const resultadoFormatado = numeral(resultadoPorData[data]).format('0,0.00');
+                resultadoHtml += `<p>${data}: ${resultadoFormatado}</p>`;
+                resultadoFinal += resultadoPorData[data];
+            }
+
+            resultadoHtml += `<p>Total: ${numeral(resultadoFinal).format('0,0.00')}</p>`;
+
+            document.getElementById(resultadoId).innerHTML = resultadoHtml;
+
+            exportarParaExcel(resultadoPorData);
+        }
+
+        function exportarParaExcel(data) {
+            const wsData = [];
+            for (const dataKey in data) {
+                wsData.push({ 'Data': dataKey, 'Resultado': data[dataKey] });
+            }
+
+            const ws = XLSX.utils.json_to_sheet(wsData, { header: ['Data', 'Resultado'] });
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Resultado");
+
+            const hoje = new Date();
+            const dataExportacao = hoje.toISOString().slice(0, 10);
+            const nomeArquivo = `Resultado_${dataExportacao}.xlsx`;
+
+            XLSX.writeFile(wb, nomeArquivo);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="inputContainer">
+                    <label for="inputDatas">Datas:</label><br>
+                    <textarea id="inputDatas" class="form-control" placeholder="Insira as datas (um por linha)"></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="inputContainer">
+                    <label for="inputValores">Valor 1:</label><br>
+                    <textarea id="inputValores" class="form-control" placeholder="Insira os valores correspondentes (um por linha)"></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="inputContainer">
+                    <label for="inputJuros">Valor 2:</label><br>
+                    <textarea id="inputJuros" class="form-control" placeholder="Insira os valores de juros correspondentes (um por linha)"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="resultado"></div>
+        <label for="operacao">Escolha a Operação:</label>
+        <select id="operacao" class="form-control">
+            <option value="soma">Soma</option>
+            <option value="subtracao">Subtração</option>
+        </select><br>
+        <button class="btn btn-primary btn-custom" onclick="calcularOperacao(
+            document.getElementById('inputDatas').value,
+            document.getElementById('inputValores').value,
+            document.getElementById('inputJuros').value,
+            document.getElementById('operacao').value,
+            'resultado')">Calcular</button>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="inputContainer">
+                    <label for="inputData">Datas:</label><br>
+                    <textarea id="inputData" class="form-control" placeholder="Insira as datas (um por linha)"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="inputContainer">
+                    <label for="inputValor">Valores:</label><br>
+                    <textarea id="inputValor" class="form-control" placeholder="Insira os valores correspondentes (um por linha)"></textarea>
+                </div>
+            </div>
+        </div>
+        <label for="operacaoOutro">Escolha a Operação:</label>
+        <select id="operacaoOutro" class="form-control">
+            <option value="soma">Soma</option>
+            <option value="subtracao">Subtração</option>
+        </select>
+        <div id="resultadoOutro"></div>
+        <button class="btn btn-primary btn-custom" onclick="calcularOperacao(
+            document.getElementById('inputData').value,
+            document.getElementById('inputValor').value,
+            null,
+            document.getElementById('operacaoOutro').value,
+            'resultadoOutro')">Calcular</button>
+    </div>
+    <footer>Desenvolvido por: Luis Filipe</footer>
+</body>
+
+</html>
