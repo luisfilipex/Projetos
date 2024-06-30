@@ -28,7 +28,7 @@
         <label for="codigo" class="form-label">Código</label>
     </div>
     <div class="mt-3 form-floating">
-        <input type="text" class="form-control" id="cliente" name="cliente"> <!-- Verifique o atributo name -->
+        <input type="text" class="form-control" id="cliente" name="cliente">
         <label for="cliente" class="form-label">Cliente</label>
     </div>
     <div class="mt-3 form-floating">
