@@ -1,5 +1,5 @@
 <?php
-include_once("../Controller/conexao.php"); // Ajuste o caminho conforme necessário
+include_once("../Controller/conexao.php"); 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     $id_conta_pagar = $_GET['id'];
