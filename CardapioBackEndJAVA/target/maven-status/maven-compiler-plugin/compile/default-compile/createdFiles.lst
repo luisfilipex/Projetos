@@ -1,0 +1,10 @@
+com\example\cardapio\config\WebConfig.class
+com\example\cardapio\ServletInitializer.class
+com\example\cardapio\food\Food.class
+com\example\cardapio\config\FileUploadController.class
+com\example\cardapio\food\FoodRepository.class
+com\example\cardapio\CardapioApplication.class
+com\example\cardapio\food\FoodReponseDTO.class
+com\example\cardapio\controller\FoodController.class
+com\example\cardapio\food\FoodResponseDTO.class
+com\example\cardapio\food\FoodRequestDTO.class
