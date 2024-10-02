@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Área de Cadastro</title>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/administrativo">Sistema de cadastro</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+            aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/administrativo">Home <span class="sr-only">(página atual)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <!-- Caso queira colocar algo no navbar ao lado direito-->
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item active bg-dark text-white">Menu</li>
+                <a href="/cadastroVenda"><li class="list-group-item">Cadastro Venda</li></a>
+                <a href="/listarVenda"><li class="list-group-item">Lista Vendas</li></a>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h1>Cadastro Venda</h1>
+
+            <!-- Alerta de mensagem -->
+            <div th:if="${mensagem}" class="alert alert-success" role="alert">
+                <span th:text="${mensagem}"></span>
+            </div>
+
+            <form action="/salvarVenda" th:object="${venda}" method="POST">
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" readonly="true" class="form-control" id="id" th:field="*{id}">
+
+                    <label for="funcionario">Funcionário:</label>
+                    <select class="form-control" th:field="*{funcionario}">
+                        <option value="">Selecione um Funcionário</option>
+                        <!-- Loop para exibir os funcionários no dropdown -->
+                        <option th:each="func : ${funcionarios}"
+                                th:value="${func.id}"
+                                th:text="${func.nome}">
+                        </option>
+                    </select>
+
+                    <label for="cliente">Cliente:</label>
+                    <select class="form-control" th:field="*{cliente}">
+                        <option value="">Selecione um Cliente</option>
+                        <option th:each="cli : ${cliente}"
+                                th:value="${cli.id}"
+                                th:text="${cli.nome}">
+                        </option>
+                    </select>
+
+                    <label for="nome">Observação:</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{obs}">
+
+                    <!-- Tabela de Produtos -->
+                    <div class="form-group">
+                        <label for="produto">Produto:</label>
+                        <select class="form-control" id="produto" th:field="*{produto}" onchange="atualizarPreco()">
+                            <option value="">Selecione um Produto</option>
+                            <!-- Loop para exibir os produtos no dropdown -->
+                            <option th:each="prod : ${produtos}"
+                                    th:value="${prod.id}"
+                                    th:text="${prod.nome}"
+                                    th:data-preco="${prod.preco}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="number" class="form-control" id="quantidade" th:field="*{quantidadeTotal}" oninput="calcularValorTotal()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preco">Preço unidade:</label>
+                        <input type="text" class="form-control" id="preco" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valorTotal">Valor Total:</label>
+                        <input type="text" class="form-control" id="valorTotal" readonly>
+                    </div>
+
+                    <!-- Botão para adicionar produto à tabela -->
+                    <button type="button" class="btn btn-success" onclick="adicionarProduto()">Adicionar Produto</button>
+
+                    <!-- Tabela de produtos adicionados -->
+                    <div class="mt-4">
+                        <h5>Produtos Adicionados:</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody id="produtosAdicionados">
+                            <!-- Produtos serão adicionados dinamicamente aqui -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a class="btn btn-secondary" href="/listarVenda"> Lista </a>
+                <a class="btn btn-danger" href="/administrativo"> Voltar </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript (Opcional) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+<script>
+    // Função para atualizar o preço baseado no produto selecionado
+    function atualizarPreco() {
+        var produtoSelect = document.getElementById("produto");
+        var precoInput = document.getElementById("preco");
+        var produtoSelecionado = produtoSelect.options[produtoSelect.selectedIndex];
+
+        // Define o preço do produto selecionado no campo de preço
+        var precoProduto = produtoSelecionado.getAttribute("data-preco");
+
+        // Atualiza o preço
+        precoInput.value = precoProduto;
+
+        // Chama a função para calcular o valor total após a atualização do preço
+        calcularValorTotal();
+    }
+
+    // Função para calcular o valor total do produto
+    function calcularValorTotal() {
+        var preco = parseFloat(document.getElementById("preco").value) || 0;
+        var quantidade = parseFloat(document.getElementById("quantidade").value) || 0;
+        var valorTotalInput = document.getElementById("valorTotal");
+
+        // Calcula o valor total
+        valorTotalInput.value = (preco * quantidade).toFixed(2);
+    }
+
+    // Função para adicionar produto à lista de produtos
+    function adicionarProduto() {
+        var produtoSelect = document.getElementById("produto");
+        var produtoSelecionado = produtoSelect.options[produtoSelect.selectedIndex].text;
+        var quantidade = document.getElementById("quantidade").value;
+        var preco = document.getElementById("preco").value;
+        var valorTotal = document.getElementById("valorTotal").value;
+
+        if (!produtoSelecionado || !quantidade || !preco) {
+            alert("Por favor, selecione um produto e insira a quantidade.");
+            return;
+        }
+
+        // Cria uma nova linha na tabela de produtos adicionados
+        var tabelaProdutos = document.getElementById("produtosAdicionados");
+        var novaLinha = tabelaProdutos.insertRow();
+
+        novaLinha.innerHTML = `
+            <td>${produtoSelecionado}</td>
+            <td>${quantidade}</td>
+            <td>${preco}</td>
+            <td>${valorTotal}</td>
+            <td><button type="button" class="btn btn-danger" onclick="removerProduto(this)">Remover</button></td>
+        `;
+
+        // Limpa os campos após adicionar
+        document.getElementById("produto").value = "";
+        document.getElementById("quantidade").value = "";
+        document.getElementById("preco").value = "";
+        document.getElementById("valorTotal").value = "";
+    }
+
+    // Função para remover produto da tabela
+    function removerProduto(button) {
+        var linha = button.parentNode.parentNode;
+        linha.parentNode.removeChild(linha);
+    }
+</script>
+
+</body>
+</html>

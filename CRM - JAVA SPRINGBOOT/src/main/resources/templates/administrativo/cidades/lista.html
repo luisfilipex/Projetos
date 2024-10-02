@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cidades</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/administrativo">Sistema de Cadastro</a>
+</nav>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Cidades</h2>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome da Cidade</th>
+            <th>Estado</th>
+            <th>Ações</th>
+        </tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cidade : ${listarCidade}">
+            <td th:text="${cidade.id}"></td>
+            <td th:text="${cidade.nome}"></td>
+            <td th:text="${cidade.estado.sigla}"></td>
+            <td>
+                <a th:href="@{/editarCidade/{id}(id=${cidade.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/removerCidade/{id}(id=${cidade.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Tem certeza que deseja remover esta cidade?');">Remover</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="/cadastroCidade">Cadastrar Nova Cidade</a>
+    <a class="btn btn-danger" href="/administrativo">Voltar</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</body>
+</html>

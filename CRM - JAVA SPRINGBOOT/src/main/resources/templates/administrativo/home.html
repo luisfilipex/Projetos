@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sistema de Vendas</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .list-group-item.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .welcome-section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #343a40;
+        }
+        .nav-link {
+            color: #495057;
+        }
+        .nav-link:hover {
+            color: #007bff;
+        }
+        .bg-dark-custom {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/administrativo">Sistema de Vendas</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/administrativo">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <!-- Formulário de pesquisa ou ação futura pode ser adicionado aqui -->
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item bg-dark-custom"><i class="fas fa-cogs"></i> Funcionalidades</li>
+                <a href="/cadastroVenda" class="list-group-item list-group-item-action">Efetuar Venda</a>
+                <a href="/listarVenda" class="list-group-item list-group-item-action">Listar Vendas</a>
+                <a href="/cadastroEntrada" class="list-group-item list-group-item-action">Efetuar Entrada de Produto</a>
+                <a href="/listarEntrada" class="list-group-item list-group-item-action">Listar Entradas de Produtos</a>
+
+                <li class="list-group-item bg-dark-custom"><i class="fas fa-plus-circle"></i> Cadastros</li>
+                <a href="/cadastroEstado" class="list-group-item list-group-item-action">Cadastro Estado</a>
+                <a href="/cadastroCidade" class="list-group-item list-group-item-action">Cadastro Cidade</a>
+                <a href="/cadastroFornecedor" class="list-group-item list-group-item-action">Cadastro Fornecedor</a>
+                <a href="/cadastroCliente" class="list-group-item list-group-item-action">Cadastro Cliente</a>
+                <a href="/cadastroFuncionario" class="list-group-item list-group-item-action">Cadastro Funcionário</a>
+                <a href="/cadastroProduto" class="list-group-item list-group-item-action">Cadastro Produto</a>
+
+                <li class="list-group-item bg-dark-custom"><i class="fas fa-list-alt"></i> Listas</li>
+                <a href="/listarEstado" class="list-group-item list-group-item-action">Listar Estados</a>
+                <a href="/listarCidade" class="list-group-item list-group-item-action">Listar Cidades</a>
+                <a href="/listarFornecedor" class="list-group-item list-group-item-action">Listar Fornecedores</a>
+                <a href="/listarCliente" class="list-group-item list-group-item-action">Listar Clientes</a>
+                <a href="/listarFuncionario" class="list-group-item list-group-item-action">Listar Funcionários</a>
+                <a href="/listarProduto" class="list-group-item list-group-item-action">Listar Produtos</a>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="welcome-section">
+                <h1>Seja Bem-Vindo</h1>
+                <p>Sistema de vendas para sua empresa. Gerencie suas vendas e cadastros de forma eficiente e prática.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+</body>
+</html>
