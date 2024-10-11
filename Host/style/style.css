@@ -1,0 +1,121 @@
+
+.nav-img{
+    width: 80px;
+    height: 50px;
+    margin-left: 15px;
+}
+.quem-somos {
+    margin-top: 100px;
+    margin-left: 100px; 
+    margin-right: auto; 
+}
+.txt-card{
+    text-align: center;
+    margin-top: 450px;
+}
+.txt-card1{
+    text-align: center;
+}
+.img-custom {
+    width: 500px; 
+    height: 200px;
+}
+.margin{
+    padding-top: 50px;
+}
+.card-container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    gap: 10px; 
+    padding: 0;
+    margin-top: 80px; 
+}
+.card {
+    margin-left: 5px; 
+    padding: 3px; 
+}
+
+.cpanel {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
+    max-width: 1200px; 
+    margin: 40px auto; 
+    background-color: #dee2e76c; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.cpanel img {
+    max-width: 40%; 
+    margin-left: 20px; 
+    border-radius: 10px;
+}
+
+.cpanel .content {
+    max-width: 50%; 
+}
+
+.cpanel h1 {
+    margin-bottom: 10px;
+}
+
+.cpanel p {
+    margin-bottom: 20px;
+}
+
+.cpanel-left {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
+    max-width: 1200px; 
+    margin: 40px auto; 
+    background-color: #c7d3f3;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.cpanel-left img {
+    max-width: 40%; 
+    margin-right: 20px; 
+    border-radius: 10px;
+}
+
+.cpanel-left .content {
+    max-width: 50%; 
+    margin-left: 10px;
+}
+.small-font-list {
+    font-size: 0.9rem; 
+    line-height: 1.5;
+}
+
+.cpanel-left h1 {
+    margin-bottom: 10px;
+}
+
+.cpanel-left p {
+    margin-bottom: 20px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+}
+
+.custom-card {
+    flex: 1 0 18rem;
+    margin: 10px; 
+}
+.card-text{
+    font-size: 12px;
+}
+
+.footer-img{
+    width: 20px;
+    gap: 15px;
+}
