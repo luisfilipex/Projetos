@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha página</title>
+    <title>HostPLAN - Seu site seguro e aqui</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
@@ -15,35 +15,112 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link"href="quemsomos">Quem Somos</a>
+                    <a class="nav-link" href="#quemsomos">Quem Somos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Parceiros</a>
+                    <a class="nav-link"href="#parceiros">Parceiros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"href="#">Servicos</a>
+                    <a class="nav-link" href="#servicos">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contato">Contato</a>
                 </li>
             </ul>
         </div>
     </nav>
    
 
-    <section id="quemsomos">
+    <section id="home">
         <div class="container">
             <div class="d-flex align-items-center flex-wrap"> 
                 <div class="text-container" style="flex: 1; padding: 20px;"> 
                     <p class="font-weight-bold">Tudo o que você precisa está aqui na HostPLAN</p>
                     <span>Bem-vindo à HostPLAN, sua parceira ideal para hospedagem de sites! Oferecemos soluções completas e personalizadas para atender a todas as suas necessidades digitais. Com um compromisso inabalável com a qualidade e a segurança, garantimos que seu site esteja sempre online e acessível.</span>
-                    <button type="button" class="btn btn-primary" style="margin-top: 20px;">Saiba mais</button>
+                    <button type="button" class="btn btn-primary" style="margin-top: 20px;" onclick="window.location.href='#quemsomos'">Saiba mais sobre nós</button><br>
                 </div>
-                <img src="/img/02.png" class="quem-somos img-fluid" alt="quemsomo" style="flex: 0 0 300px; margin-left: 20px;"> <!-- Ajustando a largura da imagem -->
+                <img src="/img/02.png" class="home img-fluid" alt="quemsomo" style="flex: 0 0 300px; margin-left: 20px;">
             </div>
         </div>
     </section>
     
-    <section></section>
+    <section class="quem-somos" id="quemsomos">
+        <h1>Quem Somos</h1>
+        <p>
+            Na <strong>HosPlan</strong>, entendemos que a presença digital é essencial para o sucesso de qualquer negócio. Fundada em 2014, somos uma empresa de hospedagem de sites dedicada a fornecer soluções inovadoras e confiáveis para nossos clientes. Com uma infraestrutura de ponta e tecnologia de última geração, garantimos que sua plataforma digital esteja sempre rápida, segura e disponível.
+        </p>
+    
+        <h2>O que oferecemos:</h2>
+        <ul>
+            <li><strong>Hospedagem Rápida e Confiável:</strong> Nossos servidores de alta performance garantem tempos de carregamento rápidos e uptime de 99,9%, para que seu site esteja sempre acessível.</li>
+            <li><strong>Suporte Especializado 24/7:</strong> Nossa equipe de especialistas está sempre à disposição para oferecer assistência técnica e aconselhamento, garantindo que você tenha a ajuda necessária a qualquer momento.</li>
+            <li><strong>Soluções Escaláveis:</strong> Desde planos de hospedagem compartilhada até servidores dedicados, temos opções para atender as necessidades de empresas de todos os tamanhos, permitindo que você escale conforme seu negócio cresce.</li>
+            <li><strong>Segurança em Primeiro Lugar:</strong> Implementamos medidas de segurança robustas, incluindo certificados SSL, proteção contra DDoS e backups automáticos, para proteger seus dados e a integridade do seu site.</li>
+            <li><strong>Painel de Controle Intuitivo:</strong> Oferecemos um painel de controle fácil de usar, que permite gerenciar seu site, domínios e contas de e-mail com apenas alguns cliques.</li>
+        </ul>
+    
+        <p>
+            Na <strong>HosPlan</strong>, nosso compromisso vai além da hospedagem; buscamos ser um verdadeiro parceiro no seu crescimento digital. Junte-se a milhares de clientes satisfeitos e descubra como podemos ajudar a impulsionar sua presença online!
+        </p>
+        
+        <p><strong>HosPlan — Conectando você ao futuro digital.</strong></p>
+    </section>
+    <section class="parceiros" id="parceiros">
+        <h1 class="parceirostitle">Parceiros</h1>
+        <div class="parceiros-container">
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+            <div class="parceiros-card">
+                <div class="parceiros-cardsub">
+                    <img src="/img/parceiro.jpg" class="sejaparceiro">
+                    <h3>Seja Parceiro</h3>
+                    <p>Hospede seu site ou sua loja com a melhor</p>
+                    <span>Garanta sua vaga ja!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
-    <section>
+    <section id="servicos">
         <h1 class="txt-card">Planos de hospedagem com diversos recursos ilimitados!<br></h1>
             <p class="txt-card1">Hospedagem de Site completa para você conquistar clientes online. Escolha a melhor para você:</p>
         <div class="card-container">
@@ -286,26 +363,41 @@
             </div>
         </div>
     </section>
-    <section>
-
-    </section>
-    <footer>
-        <nav class="navbar navbar-expand-lg bg-light">
-        <a class="navbar-brand" href="index.html">
-            
-        </a>
-        <div class="collapse navbar-collapse">
-            <div>
-                <p class="nav-item">Copyright © 1997-2024 HostPLAN Serviços de Internet S/A</p>
+    <section class="contato" id="contato">
+        <h1 class="contato-title">Contato</h1>
+        <form class="contato-form">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="JOÃO DA SILVA">
             </div>
-            <img src="/img/insta.png" class="footer-img">
-            <img src="/img/wpp.png" class="footer-img">
-            <img src="/img/you.png" class="footer-img">
-            <img src="/img/face.png" class="footer-img">
-            <img src="/img/linkedin.png" class="footer-img">
-        </div>
-        
-    </nav>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="mensagem" class="form-label">Mensagem</label>
+                <textarea class="form-control" id="mensagem" rows="4" placeholder="Escreva sua mensagem aqui..."></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-outline-primary btn-lg">Enviar</button>
+            </div>
+        </form>
+    </section>
+    <footer class="footer">
+        <nav class="navbar navbar-expand-lg bg-light justify-content-between">
+            <div class="container">
+                <div class="text-center flex-grow-1">
+                    <p class="nav-item mb-0">Copyright © 1997-2024 HostPLAN Serviços de Internet S/A</p>
+                </div>
+                <div class="d-flex">
+                    <img src="/img/insta.png" class="footer-img mx-2" alt="Instagram">
+                    <img src="/img/wpp.png" class="footer-img mx-2" alt="WhatsApp">
+                    <img src="/img/you.png" class="footer-img mx-2" alt="YouTube">
+                    <img src="/img/face.png" class="footer-img mx-2" alt="Facebook">
+                    <img src="/img/linkedin.png" class="footer-img mx-2" alt="LinkedIn">
+                </div>
+            </div>
+        </nav>
     </footer>
 </body>
 </html>
