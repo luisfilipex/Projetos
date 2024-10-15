@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETFLIX</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="/img/Netflix-Logo-300x169.png" class="logo">
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Séries</a>
+                <a href="#">Filmes</a>
+                <a href="#">Documentários</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="filme-principal">
+            <div class="container">
+                <h3 class="titulo">HOUSE OF CARDS</h3>
+                <p class="descricao">Nada pode impedir o politico sem escrúpulos Frank Underwood de conquistar
+                    Washington. Assista agora a nova temporada de House of Cards que está imperdível</p>
+                <div class="botoes">
+                    <button role="button" class="botao"><i class="fa-solid fa-play"></i>ASSISTIR AGORA</button>
+                    <button role="button" class="botao"><i class="fa-solid fa-circle-info"></i>MAIS INFORMAÇÕES</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="carrosel-filmes">
+        <h2>Lançamentos</h2>
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <img src="img/01.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/02.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/03.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/04.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/05.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/07.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/08.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/09.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/19.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/11.jpg" alt="" class="box-filme">
+            </div>
+            <div class="item">
+                <img src="img/12.jpg" alt="" class="box-filme">
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/4fc984612e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true
+        });
+        $('.play').on('click', function () {
+            owl.trigger('play.owl.autoplay', [1000])
+        })
+        $('.stop').on('click', function () {
+            owl.trigger('stop.owl.autoplay')
+        })
+    </script>
+</body>
+
+</html>
